@@ -28,7 +28,7 @@ public class LottoController {
             if(input % LOTTO_PER_MONEY != 0){
                 lottoView.printExtraMoney(input % LOTTO_PER_MONEY);
             }
-            //lottoWallet.addLotto(LOTTO_WALLET_SIZE);
+            lottoWallet.addLotto(LOTTO_WALLET_SIZE);
         }catch (Exception e){
             throw new IllegalArgumentException();
         }

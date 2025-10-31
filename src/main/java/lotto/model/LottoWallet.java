@@ -12,7 +12,13 @@ public class LottoWallet {
         lottoList = new ArrayList<>();
     }
 
+    public void addLotto(int count) {
+        for(int i=0; i<count; i++) {
+            lottoList.add(new Lotto(randLottoNumbers()));
+        }
+    }
 
-
-
+    private List<Integer> randLottoNumbers() {
+        return Randoms.pickUniqueNumbersInRange(1, 45, 6);
+    }
 }
