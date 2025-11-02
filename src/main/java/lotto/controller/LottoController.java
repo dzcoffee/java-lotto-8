@@ -23,21 +23,27 @@ public class LottoController {
     }
 
     private void buyLottoWallet(){
-        try{
-            int input = Integer.parseInt(Console.readLine());
-            LOTTO_WALLET_SIZE = input/ LOTTO_PER_MONEY;
-            lottoView.printBuyLotto(LOTTO_WALLET_SIZE);
-            if(input % LOTTO_PER_MONEY != 0){
-                lottoView.printExtraMoney(input % LOTTO_PER_MONEY);
-            }
-            lottoWallet.addLotto(LOTTO_WALLET_SIZE);
-
-            machineController = new MachineController(LOTTO_WALLET_SIZE, lottoWallet);
-            machineController.start();
-        }catch (Exception e){
-            throw new IllegalArgumentException();
+        int input =inputMoney();
+        LOTTO_WALLET_SIZE = input/ LOTTO_PER_MONEY;
+        lottoView.printBuyLotto(LOTTO_WALLET_SIZE);
+        if(input % LOTTO_PER_MONEY != 0){
+            lottoView.printExtraMoney(input % LOTTO_PER_MONEY);
         }
+        lottoWallet.addLotto(LOTTO_WALLET_SIZE);
+
+        machineController = new MachineController(LOTTO_WALLET_SIZE, lottoWallet);
+        machineController.start();
     }
 
+    private int inputMoney(){
+        while(true){
+            try{
+                int input = Integer.parseInt(Console.readLine());
+                return input;
+            }catch(NumberFormatException e){
+                System.out.println("[ERROR] 입력된 금액이 숫자가 아닙니다.");
+            }
+        }
 
+    }
 }

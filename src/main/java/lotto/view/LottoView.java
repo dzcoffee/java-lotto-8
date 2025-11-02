@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.model.LottoWallet;
-
 public class LottoView {
 
     public void printPayMoney(){

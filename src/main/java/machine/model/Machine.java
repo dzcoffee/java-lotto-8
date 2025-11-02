@@ -1,10 +1,11 @@
 package machine.model;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lotto.model.LottoWallet;
 import lotto.model.Rank;
 
@@ -21,9 +22,23 @@ public class Machine {
     public void addCollectNumbers() {
         String input = Console.readLine();
         String[] numbers = input.split(",");
+        if(numbers.length != 6){
+            throw new IllegalArgumentException("[ERROR] 로또 숫자는 6개여야 합니다.");
+        }
+        Set<Integer> distinctNumbers = new HashSet<>();
+
         collectNumberList = new ArrayList<>();
         for (String number : numbers) {
-            collectNumberList.add(Integer.parseInt(number));
+            int num = Integer.parseInt(number);
+            if(num < 1 || num > 45){
+                throw new IllegalArgumentException("[ERROR] 로또 구매 번호는 1부터 45 사이의 숫자여야 합니다.");
+            }
+
+            if(distinctNumbers.contains(num)){
+                throw new IllegalArgumentException("[ERROR] 추첨 숫자에 중복된 값이 존재합니다.");
+            }
+            collectNumberList.add(num);
+            distinctNumbers.add(num);
         }
     }
 
