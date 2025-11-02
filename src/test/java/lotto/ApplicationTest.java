@@ -8,9 +8,11 @@ import java.util.List;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
+    private static final String INFO_MESSAGE = "[INFO]";
 
     @Test
     void 기능_테스트() {
@@ -47,10 +49,28 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구매번호_범위_초과_예외_테스트() {
+        assertSimpleTest(
+                () -> {
+                    assertThatThrownBy(() -> runException("8000", "1,2,3,4,5,68", "7"))
+                            .isInstanceOf(IllegalArgumentException.class);
+                }
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() -> {
             runException("1000j");
             assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 남는_금액_테스트() {
+        assertSimpleTest(() -> {
+            runException("10500");
+            assertThat(output()).contains(INFO_MESSAGE);
         });
     }
 

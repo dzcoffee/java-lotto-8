@@ -11,6 +11,6 @@ public class LottoView {
     }
 
     public void printExtraMoney(int extraMoney){
-        System.out.println("남는 금액 " + extraMoney +"는 반환됩니다.");
+        System.out.println("[INFO] 남는 금액 " + extraMoney +"는 반환됩니다.");
     }
 }
